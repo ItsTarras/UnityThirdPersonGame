@@ -27,29 +27,30 @@ public class CameraFollower : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        #region Player Rotation
-        //Move the player based on the rotation power.
-
+        // Move the player based on the rotation power.
         float mouseX = rotationPower * Input.GetAxis("Mouse X");
         float mouseY = rotationPower * Input.GetAxis("Mouse Y");
 
         // Apply rotation to the camera based on the input
-        transform.Rotate(Vector3.up, mouseX * rotationPower, Space.World);  // Horizontal rotation
-        transform.Rotate(Vector3.right, mouseY * rotationPower, Space.Self); // Vertical rotation
+        transform.Rotate(Vector3.up, mouseX, Space.World);  // Horizontal rotation
+        transform.Rotate(Vector3.right, -mouseY, Space.Self); // Vertical rotation
 
         // Reset the Z-axis rotation to zero
         transform.rotation = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, 0f);
-        #endregion
 
+        // Calculate the clamped angle:
+        float clampedAngle = ClampAngle(transform.localEulerAngles.x, minYAngle, maxYAngle);
 
-        //Calculate the clamped angle:
-        //float clampedAngle = Mathf.Clamp(transform.localEulerAngles.x, minYAngle, maxYAngle);
+        // Calculate and change the angle of the follow target.
+        transform.localRotation = Quaternion.Euler(clampedAngle, transform.localEulerAngles.y, 0f);
+    }
 
-        //Calculate, and change the angle of the follow target.
-        //transform.localRotation = Quaternion.Euler(clampedAngle, transform.localEulerAngles.y, 0f);
-
+    // Clamp an angle between a minimum and maximum value
+    private float ClampAngle(float angle, float min, float max)
+    {
+        angle = angle > 180f ? angle - 360f : angle;
+        return Mathf.Clamp(angle, min, max);
     }
 }

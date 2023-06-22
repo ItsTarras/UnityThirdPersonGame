@@ -10,24 +10,41 @@ public class CharacterMovement : MonoBehaviour
     private float mouseX;
     private float mouseY;
     
-    public float moveSpeed = 5;
+    public float baseSpeed = 5;
     private Rigidbody rb;
 
+    [SerializeField]
+    private float jumpHeight = 5;
 
     [SerializeField]
     private Rigidbody followTarget;
     Vector3 movement;
 
+    private float moveSpeed;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = this.GetComponent<Rigidbody>();
+        float moveSpeed = baseSpeed;
     }
 
     // Update is called once per frame
     void Update()
     {
+        //Detect key presses
         movement = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+
+        //Running input
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            moveSpeed = baseSpeed * 2;
+        }
+        else
+        {
+            moveSpeed = baseSpeed;
+        }
+
     }
 
     private void FixedUpdate()

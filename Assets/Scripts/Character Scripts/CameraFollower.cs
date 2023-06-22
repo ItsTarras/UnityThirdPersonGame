@@ -22,9 +22,17 @@ public class CameraFollower : MonoBehaviour
     [SerializeField]
     private float maxYAngle = 90f;
 
+
+    [SerializeField]
+    private GameObject PlayerModel;
+
+    // Store the initial rotation of the camera
+    private Quaternion currentRotation;
+
     void Start()
     {
-        
+        // Store the initial rotation of the camera
+        currentRotation = transform.rotation;
     }
 
     private void Update()
@@ -35,7 +43,11 @@ public class CameraFollower : MonoBehaviour
 
         // Apply rotation to the camera based on the input
         transform.Rotate(Vector3.up, mouseX, Space.World);  // Horizontal rotation
-        transform.Rotate(Vector3.right, -mouseY, Space.Self); // Vertical rotation
+        transform.Rotate(Vector3.right, mouseY, Space.Self); // Vertical rotation
+
+        //Move the player model rotation to face where the camera is.
+        PlayerModel.transform.rotation = currentRotation;
+
 
         // Reset the Z-axis rotation to zero
         transform.rotation = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, 0f);

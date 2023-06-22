@@ -36,7 +36,7 @@ public class CharacterMovement : MonoBehaviour
         movement = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 
         //Running input
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift))
         {
             moveSpeed = baseSpeed * 2;
         }

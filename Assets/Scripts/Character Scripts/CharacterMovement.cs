@@ -14,13 +14,17 @@ public class CharacterMovement : MonoBehaviour
     private Rigidbody rb;
 
     [SerializeField]
-    private float jumpHeight = 5;
+    private float descellerationLimit = 0.05f;
 
     [SerializeField]
     private Rigidbody followTarget;
+
     Vector3 movement;
 
     private float moveSpeed;
+
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -54,9 +58,19 @@ public class CharacterMovement : MonoBehaviour
 
     void moveCharacter(Vector3 direction)
     {
-        // Convert direction into Rigidbody space.
-        direction = followTarget.rotation * direction;
+        // Remove the y-component of the direction vector
+        direction.y = 0;
 
-        rb.MovePosition(rb.position + direction * moveSpeed * Time.fixedDeltaTime);
+        // Convert direction into Rigidbody space.
+        direction = Quaternion.Euler(0, followTarget.transform.rotation.eulerAngles.y, 0) * direction;
+
+        // Normalize the direction vector to eliminate speed inconsistencies
+        direction.Normalize();
+
+        // Multiply the direction by moveSpeed
+        Vector3 movement = direction * moveSpeed;
+
+        // Apply the movement to the Rigidbody
+        rb.MovePosition(rb.position + movement * Time.fixedDeltaTime);
     }
 }

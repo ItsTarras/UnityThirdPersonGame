@@ -46,7 +46,8 @@ public class CameraFollower : MonoBehaviour
         transform.Rotate(Vector3.right, mouseY, Space.Self); // Vertical rotation
 
         //Move the player model rotation to face where the camera is.
-        PlayerModel.transform.rotation = currentRotation;
+        PlayerModel.transform.rotation = Quaternion.Euler(0f, transform.eulerAngles.y, 0f);
+
 
 
         // Reset the Z-axis rotation to zero

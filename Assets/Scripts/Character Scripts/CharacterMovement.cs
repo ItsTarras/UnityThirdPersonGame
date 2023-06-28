@@ -14,9 +14,6 @@ public class CharacterMovement : MonoBehaviour
     private Rigidbody rb;
 
     [SerializeField]
-    private float descellerationLimit = 0.05f;
-
-    [SerializeField]
     private Rigidbody followTarget;
 
     Vector3 movement;

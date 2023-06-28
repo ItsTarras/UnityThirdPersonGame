@@ -12,7 +12,7 @@ public class Floating : MonoBehaviour
     private float height = 1f;
     private Vector3 originalPosition;
     private float originalHeight;
-    private bool isDescending = false;
+
     // Start is called before the first frame update
     void Start()
     {

@@ -31,24 +31,23 @@ public class Interaction : MonoBehaviour
         //layerMask = ~layerMask;
 
 
-        //Apply the raycast operations.
+        //Make a raycast hit detector variable.
         RaycastHit hit;
 
-        //Get the current rigidbody vector;
-
-        direction = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0) * direction;
+        //Make a new ray, originating at the unity object, and aiming forwards.
+        Ray ray = new Ray(transform.position, transform.forward);
 
         //Raycasting to check if an interactible is in front of the object.
-        if (Physics.Raycast(transform.position, transform.TransformDirection(direction), out hit, 5f))
+        if (Physics.Raycast(ray, out hit, 5f))
         {
             isInteracting = true;
-            Debug.DrawRay(transform.position, transform.TransformDirection(direction) * hit.distance, Color.yellow);
+            Debug.DrawRay(transform.position, transform.forward * hit.distance, Color.yellow);
             Debug.Log("Hit an object");
         }
         else
         {
             isInteracting = false;
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.white);
+            Debug.DrawRay(transform.position, transform.forward * 100, Color.white);
             Debug.Log("Did not Hit");
         }
     }

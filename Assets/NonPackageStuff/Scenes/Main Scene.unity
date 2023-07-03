@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.33629823, g: 0.35470554, b: 0.3837141, a: 1}
+  m_IndirectSpecularColor: {r: 0.33628017, g: 0.3547453, b: 0.3837188, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -484,7 +484,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 36101daa4536a2a4c89d9e329e353977, type: 2}
+  - {fileID: 2100000, guid: 7c96bf5a3c71eaa49874f8df1b478e96, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -715,6 +715,28 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &994639726 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2718275331111724106, guid: e6173d1c4c4b24846b76d318e374609c, type: 3}
+  m_PrefabInstance: {fileID: 2718275330473131632}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &994639727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 994639726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53408e65f867e6f4086e6be20bdf7adc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemType: 1
+  quantity: 1
+  itemName: White Berries
+  descriptionText: These berries taste like the smell of snow.
+  itemSprite: {fileID: 21300000, guid: be340a165cb9c8d4cb50f1deeb51d4ea, type: 3}
 --- !u!1 &1616489977
 GameObject:
   m_ObjectHideFlags: 0
@@ -728,7 +750,7 @@ GameObject:
   - component: {fileID: 1616489980}
   - component: {fileID: 1616489983}
   m_Layer: 6
-  m_Name: Character Model
+  m_Name: Character
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -754,7 +776,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 25cf391b82a62fd409ac25582b00a664, type: 2}
+  - {fileID: 2100000, guid: 50d0edf86a3681a4cbc7d08d1ba75127, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -812,6 +834,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isInteracting: 0
+  inventory: {fileID: 2029809410}
 --- !u!1 &1798068105
 GameObject:
   m_ObjectHideFlags: 3
@@ -1030,6 +1053,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2029809409}
+  - component: {fileID: 2029809410}
   m_Layer: 0
   m_Name: PlayerInventory
   m_TagString: Untagged
@@ -1052,6 +1076,19 @@ Transform:
   m_Father: {fileID: 1922953101}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2029809410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2029809408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a843f0c4c7ee82148ac056ad8b011182, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  items: []
 --- !u!1001 &2718275330473131632
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1062,6 +1099,14 @@ PrefabInstance:
     - target: {fileID: 2718275331111724106, guid: e6173d1c4c4b24846b76d318e374609c, type: 3}
       propertyPath: m_Name
       value: WhiteBerryBush
+      objectReference: {fileID: 0}
+    - target: {fileID: 2718275331111724106, guid: e6173d1c4c4b24846b76d318e374609c, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2718275331111724106, guid: e6173d1c4c4b24846b76d318e374609c, type: 3}
+      propertyPath: m_TagString
+      value: Harvestable
       objectReference: {fileID: 0}
     - target: {fileID: 2718275331111724111, guid: e6173d1c4c4b24846b76d318e374609c, type: 3}
       propertyPath: m_RootOrder

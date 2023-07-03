@@ -3,12 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Harvestable
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Harvestable
   - Water
   - UI
   - Player

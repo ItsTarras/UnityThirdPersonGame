@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Interaction : MonoBehaviour
@@ -9,6 +10,11 @@ public class Interaction : MonoBehaviour
 
     private Vector3 direction;
 
+    private InteractableItem currentInteractable; 
+    
+    public Inventory inventory;
+
+    
 
     // Start is called before the first frame update
     void Start()
@@ -19,18 +25,29 @@ public class Interaction : MonoBehaviour
     private void Update()
     {
         runInteraction();
+        if (isInteracting)
+        {
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                if (currentInteractable != null)
+                {
+                    // Add the interacted item to the inventory
+                    inventory.AddItem(currentInteractable);
+                    Debug.Log("Item added to inventory: " + currentInteractable.itemName);
+
+                    // Perform any additional actions related to the interaction here
+
+                    // Temporarily disable the object's colliders
+
+                }
+            }
+        }
+        
+        currentInteractable = null;
     }
 
     void runInteraction()
     {
-        // Bit shift the index of the layer (6) to get a bit mask
-        //int layerMask = 1 << 6;
-
-        // This would cast rays only against colliders in layer 6.
-        // But instead we want to collide against everything except layer 6. The ~ operator does this, it inverts a bitmask.
-        //layerMask = ~layerMask;
-
-
         //Make a raycast hit detector variable.
         RaycastHit hit;
 
@@ -40,16 +57,29 @@ public class Interaction : MonoBehaviour
         //Raycasting to check if an interactible is in front of the object.
         if (Physics.Raycast(ray, out hit, 5f))
         {
-            isInteracting = true;
-            Debug.DrawRay(transform.position, transform.forward * hit.distance, Color.yellow);
-            Debug.Log("Hit an object");
+            if (hit.collider.tag == "Harvestable")
+            {
+                isInteracting = true;
+                Debug.DrawRay(transform.position, transform.forward * hit.distance, Color.yellow);
+                Debug.Log("Hit an object");
+
+                // Get the InteractableItem component from the hit object
+                currentInteractable = hit.collider.GetComponent<InteractableItem>();
+            }
+            else
+            {
+                isInteracting = false;
+                Debug.DrawRay(transform.position, transform.forward * 100, Color.white);
+            }
         }
         else
         {
             isInteracting = false;
             Debug.DrawRay(transform.position, transform.forward * 100, Color.white);
-            Debug.Log("Did not Hit");
         }
     }
+
+
+    
 
 }
